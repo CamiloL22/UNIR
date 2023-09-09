@@ -1,0 +1,90 @@
+//Numero mayot
+.data
+    array:  .word 10, 5, 8, 15, 3
+    n:      .word 5       # Número de elementos en el arreglo
+    max:    .word 0       # Variable para almacenar el número mayor
+
+.text
+.globl main
+
+main:
+    lw  $t0, n           # Cargamos la longitud del arreglo en $t0
+    li  $t1, 0           # Inicializamos el índice a 0
+    li  $t2, 0           # Inicializamos la variable para el número mayor a 0
+
+loop:
+    lw  $t3, array($t1)  # Cargamos el elemento actual en $t3
+    bge $t3, $t2, update_max  # Si es mayor o igual, actualizamos max
+    addi $t1, $t1, 4     # Avanzamos al siguiente elemento del arreglo
+    subi $t0, $t0, 1     # Decrementamos el contador
+    bnez $t0, loop       # Si no hemos recorrido todos los elementos, repetimos el bucle
+    j   done
+
+update_max:
+    move $t2, $t3        # Actualizamos el número mayor
+    addi $t1, $t1, 4     # Avanzamos al siguiente elemento del arreglo
+    subi $t0, $t0, 1     # Decrementamos el contador
+    bnez $t0, loop       # Si no hemos recorrido todos los elementos, repetimos el bucle
+
+done:
+    li  $v0, 10          # Cerrar el programa
+    syscall
+
+//Numero menor
+.data
+    array:  .word 10, 5, 8, 15, 3
+    n:      .word 5       # Número de elementos en el arreglo
+    min:    .word 0       # Variable para almacenar el número menor
+
+.text
+.globl main
+
+main:
+    lw  $t0, n           # Cargamos la longitud del arreglo en $t0
+    li  $t1, 0           # Inicializamos el índice a 0
+    li  $t2, 9999        # Inicializamos la variable para el número menor con un valor grande
+
+loop:
+    lw  $t3, array($t1)  # Cargamos el elemento actual en $t3
+    ble $t3, $t2, update_min  # Si es menor o igual, actualizamos min
+    addi $t1, $t1, 4     # Avanzamos al siguiente elemento del arreglo
+    subi $t0, $t0, 1     # Decrementamos el contador
+    bnez $t0, loop       # Si no hemos recorrido todos los elementos, repetimos el bucle
+    j   done
+
+update_min:
+    move $t2, $t3        # Actualizamos el número menor
+    addi $t1, $t1, 4     # Avanzamos al siguiente elemento del arreglo
+    subi $t0, $t0, 1     # Decrementamos el contador
+    bnez $t0, loop       # Si no hemos recorrido todos los elementos, repetimos el bucle
+
+done:
+    li  $v0, 10          # Cerrar el programa
+    syscall
+    
+ //Fibonacci
+ .data
+    n:      .word 10  # Número de términos de la serie Fibonacci
+    result: .word 0   # Variable para almacenar el resultado
+
+.text
+.globl main
+
+main:
+    lw  $t0, n          # Cargamos el número de términos en $t0
+    li  $t1, 0          # Inicializamos el primer término a 0
+    li  $t2, 1          # Inicializamos el segundo término a 1
+    li  $t3, 2          # Inicializamos el contador en 2 (ya tenemos 2 términos)
+
+loop:
+    beq $t3, $t0, done  # Si hemos generado todos los términos, salimos del bucle
+    add $t4, $t1, $t2   # Sumamos los dos términos anteriores
+    sw  $t4, result($t3)  # Almacenamos el resultado en el arreglo
+    move $t1, $t2       # Actualizamos el primer término con el segundo
+    move $t2, $t4       # Actualizamos el segundo término con el resultado
+    addi $t3, $t3, 1    # Incrementamos el contador
+    j   loop
+
+done:
+    li  $v0, 10         # Cerrar el programa
+    syscall
