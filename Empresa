@@ -1,0 +1,19 @@
+# Datos
+caja = 8000
+clientes = 56000
+prestamo_bancario = 52000
+pagares_pendientes = 4000
+proveedores = 60000
+patrimonio_neto = 500000
+
+# Cálculo de la liquidez
+activos_corrientes = caja + clientes
+pasivos_corrientes = prestamo_bancario + pagares_pendientes + proveedores
+liquidez = activos_corrientes / pasivos_corrientes
+
+# Cálculo del fondo de rotación
+activo_total = activos_corrientes + patrimonio_neto
+fondo_de_rotacion = patrimonio_neto / activo_total
+
+print(f"Liquidez: {liquidez:.2f}")
+print(f"Fondo de Rotación: {fondo_de_rotacion:.2f}")
