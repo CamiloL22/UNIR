@@ -1,19 +1,19 @@
-# Datos
-caja = 8000
-clientes = 56000
-prestamo_bancario = 52000
-pagares_pendientes = 4000
-proveedores = 60000
-patrimonio_neto = 500000
+# Pedir al usuario que ingrese los valores de activos y pasivos
+activos_caja = float(input("Ingrese el valor de caja: "))
+activos_clientes = float(input("Ingrese el valor de cuentas por cobrar (clientes): "))
+activos_productos = float(input("Ingrese el valor de productos terminados en almacén: "))
 
-# Cálculo de la liquidez
-activos_corrientes = caja + clientes
-pasivos_corrientes = prestamo_bancario + pagares_pendientes + proveedores
-liquidez = activos_corrientes / pasivos_corrientes
+pasivos_prestamo = float(input("Ingrese el valor del préstamo bancario: "))
+pasivos_proveedores = float(input("Ingrese el valor de deudas con proveedores: "))
+pasivos_pagarés = float(input("Ingrese el valor de pagarés pendientes de cobro: "))
 
-# Cálculo del fondo de rotación
-activo_total = activos_corrientes + patrimonio_neto
-fondo_de_rotacion = patrimonio_neto / activo_total
+# Calcular la liquidez
+liquidez = (activos_caja + activos_clientes) / (pasivos_prestamo + pasivos_proveedores + pasivos_pagarés)
 
-print(f"Liquidez: {liquidez:.2f}")
-print(f"Fondo de Rotación: {fondo_de_rotacion:.2f}")
+# Calcular el fondo de rotación
+fondo_rotacion = (activos_caja + activos_clientes + activos_productos) / (pasivos_prestamo + pasivos_proveedores + pasivos_pagarés)
+
+# Mostrar los resultados
+print("\nResultados:")
+print(f"Liquidez: {liquidez:.4f}")
+print(f"Fondo de Rotación: {fondo_rotacion:.4f}")
